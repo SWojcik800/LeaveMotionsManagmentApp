@@ -1,4 +1,6 @@
 using LeaveMotionsManagmentApp.Data;
+using LeaveMotionsManagmentApp.Entities;
+using LeaveMotionsManagmentApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,13 +29,12 @@ namespace LeaveMotionsManagmentApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddHttpContextAccessor();
+            services.AddApplicationServices(Configuration);
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentityServices(Configuration);
             services.AddControllersWithViews();
         }
 
