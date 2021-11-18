@@ -17,12 +17,12 @@ namespace LeaveMotionsManagmentApp.Controllers
 {
     public class MotionsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+       
         private readonly IMotionRepository _motionRepository;
 
-        public MotionsController(ApplicationDbContext context, IMotionRepository motionRepository)
+        public MotionsController(IMotionRepository motionRepository)
         {
-            _context = context;
+           
             _motionRepository = motionRepository;
         }
 
@@ -62,23 +62,11 @@ namespace LeaveMotionsManagmentApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,Description,RequestedStartingDate,RequestedDueDate,MotionState")] CreateMotion model)
         {
-            Motion motion = new Motion()
-            {
-                Name = model.Name,
-                Description = model.Description,
-                Send = DateTime.Now,
-                RequestedStartingDate = model.RequestedStartingDate,
-                RequestedDueDate = model.RequestedDueDate,
-                MotionState = MotionState.Pending,
-                ExaminationDate = null,
-                EmployeeId = HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier),
-                SupervisorId = null
-            };
 
+            var motion = new Motion();
             if (ModelState.IsValid)
             {
-                _context.Add(motion);
-                await _context.SaveChangesAsync();
+                motion = await _motionRepository.CreateMotion(model);
                 return RedirectToAction(nameof(Index));
             }
            
@@ -92,7 +80,7 @@ namespace LeaveMotionsManagmentApp.Controllers
                 return NotFound();
             
 
-            var motion = await _context.Motions.FindAsync(id);
+            var motion = await _motionRepository.GetMotion(id);
             if (motion == null)
                 return NotFound();
             
@@ -108,7 +96,7 @@ namespace LeaveMotionsManagmentApp.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Name,Description,RequestedStartingDate,RequestedDueDate")] Motion editedMotion)
         {
 
-            var motion = await _context.Motions.FirstOrDefaultAsync(motion => motion.Id == id);
+            var motion = await _motionRepository.GetMotion(id);
             
             if (motion is null)
                 return NotFound();
@@ -121,40 +109,21 @@ namespace LeaveMotionsManagmentApp.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(motion);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MotionExists(motion.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _motionRepository.UpdateMotion(id, motion);
                 return RedirectToAction(nameof(Index));
             }
       
             return View(motion);
         }
 
-        // GET: Motions/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // GET: Motions/Cancel/5
+        public async Task<IActionResult> Cancel(int? id)
         {
             if (id == null)
                 return NotFound();
-            
 
-            var motion = await _context.Motions
-                .Include(m => m.Employee)
-                .Include(m => m.Supervisor)
-                .FirstOrDefaultAsync(m => m.Id == id);
 
+            var motion = await _motionRepository.CancelMotion(id);
             if (motion == null)
                 return NotFound();
             
@@ -162,20 +131,15 @@ namespace LeaveMotionsManagmentApp.Controllers
             return View(motion);
         }
 
-        // POST: Motions/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Motions/Cancel/5
+        [HttpPost, ActionName("Cancel")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> CancelConfirmed(int id)
         {
-            var motion = await _context.Motions.FindAsync(id);
-            _context.Motions.Remove(motion);
-            await _context.SaveChangesAsync();
+            await _motionRepository.CancelMotion(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MotionExists(int id)
-        {
-            return _context.Motions.Any(e => e.Id == id);
-        }
+ 
     }
 }

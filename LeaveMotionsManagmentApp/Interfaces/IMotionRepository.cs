@@ -8,5 +8,8 @@ namespace LeaveMotionsManagmentApp.Interfaces
     {
         Task<List<Motion>> ListMotions();
         Task<Motion> GetMotion(int? id);
+        Task<Motion> CancelMotion(int? id);
+        Task<Motion> CreateMotion(CreateMotion model);
+        Task UpdateMotion(int id, Motion editedMotion);
     }
 }

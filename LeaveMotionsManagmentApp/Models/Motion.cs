@@ -9,7 +9,8 @@ namespace LeaveMotionsManagmentApp.Models
     public enum MotionState {
         Accepted,
         Denied,
-        Pending
+        Pending,
+        Cancelled
     }
     public class Motion
     {
