@@ -1,6 +1,7 @@
 ﻿using LeaveMotionsManagmentApp.Data;
 using LeaveMotionsManagmentApp.Interfaces;
 using LeaveMotionsManagmentApp.Repositories;
+using LeaveMotionsManagmentApp.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,7 +19,9 @@ namespace LeaveMotionsManagmentApp.Extensions
              options.UseSqlServer(
                  Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddScoped<IFilterQueryBuilder, FilterQueryBuilder>();
             services.AddScoped<IMotionRepository, MotionRepository>();
+            
 
            
 

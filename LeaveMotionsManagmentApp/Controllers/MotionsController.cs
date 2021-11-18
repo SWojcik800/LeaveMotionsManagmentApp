@@ -19,13 +19,18 @@ namespace LeaveMotionsManagmentApp.Controllers
             _motionRepository = motionRepository;
         }
 
-
         [Authorize(Roles="Employee, Supervisor")]
         // GET: Motions
+        
         public async Task<IActionResult> Index()
         {
-
             return View(await _motionRepository.ListMotions());
+        }
+
+        // GET: Motions/Query/{name}
+        public async Task<IActionResult> Query([FromQuery] FilterQuery query)
+        {
+            return View(nameof(Index), await _motionRepository.FilterMotions(query));
         }
 
         [Authorize(Roles = "Employee, Supervisor")]

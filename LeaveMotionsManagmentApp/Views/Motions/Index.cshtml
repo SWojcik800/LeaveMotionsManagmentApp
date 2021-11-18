@@ -4,10 +4,55 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Motions</h1>
+<br />
+<form asp-controller="Motions" asp-action="Query" method="get">
+    <p>
+        
+        <input type="text" name="name" placeholder="Name of the motion/user" />
+       &nbsp;
+     
+        <select name="state">
+            <option value="">All</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Denied">Denied</option>
+            <option value="Pending">Pending</option>
+            @if (User.IsInRole("Supervisor"))
+            {
+                <option value="Cancelled">Cancelled</option>
+            }
+        </select>
+        <div class="form-group">
+            <label>Send</label>
+            <br />
+            <input type="date" data-date-format="DD MMMM YYYY" name="Send" value="" />
+            <br />
 
+            <label>Requested Starting</label>
+            <br />
+
+            <input type="date" data-date-format="DD MMMM YYYY" name="requestedStartingDate" value="" />
+            <br />
+            <label>Requested Due</label>
+            <br />
+
+            <input type="date" data-date-format="DD MMMM YYYY" name="requestedDueDate" value="" />
+            <br />
+            <label>Display</label>
+            <br />
+            <input type="number" name="displayResults" value="5" />
+        </div>
+        
+        <input class="btn btn-primary mt-2" type="submit" value="Search" />
+    </p>
+</form>
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    @if (User.IsInRole("Employee"))
+    {
+        <a asp-action="Create" class="btn btn-success">Create New</a>
+    }
+
 </p>
 <table class="table">
     <thead>
@@ -71,23 +116,30 @@
 
         </td>
             }
-            <td>
-                @if (User.IsInRole("Employee"))
-                {
-                    <a asp-action="Cancel" asp-route-id="@item.Id">Cancel</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                }
-                @if (User.IsInRole("Supervisor"))
-                {
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    <a asp-action="Accept" asp-route-id="@item.Id">Accept</a>
-                    <a asp-action="Deny" asp-route-id="@item.Id">Deny</a>
-                }
+        <td>
+            @if (User.IsInRole("Employee"))
+            {
+                <a asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-danger">Cancel</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
+            }
+            @if (User.IsInRole("Supervisor"))
+            {
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger ">Delete</a>
+                <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success mt-2">Accept</a>
+                <a asp-action="Deny" asp-route-id="@item.Id" class="btn btn-warning mt-2">Deny</a>
+            }
 
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+            @if (User.IsInRole("Employee"))
+            {
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+            }else
+            {
+            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary mt-2">Details</a>
+            }
 
 
-            </td>
+
+        </td>
         </tr>
 }
     </tbody>

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LeaveMotionsManagmentApp.Repositories
 {
@@ -15,20 +16,35 @@ namespace LeaveMotionsManagmentApp.Repositories
     {
         private readonly ApplicationDbContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IFilterQueryBuilder _filterQueryBuilder;
 
-        public MotionRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+        public MotionRepository(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, IFilterQueryBuilder filterQueryBuilder)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
+            _filterQueryBuilder = filterQueryBuilder;
         }
+        
         
         public async Task<List<Motion>> ListMotions()
         {
-            var motionList =  getBaseQuery()
-                 .Include(m => m.Employee)
-                 .Include(m => m.Supervisor);
 
+            var motionList = getBaseQuery()
+                .Include(m => m.Employee)
+                .Include(m => m.Supervisor); ;
             return await motionList.ToListAsync();
+        }
+        public async Task<List<Motion>> FilterMotions(FilterQuery? query)
+        {
+            var motionList = _filterQueryBuilder.buildQuery(getBaseQuery(), query);
+
+
+            List<Motion> motionsList = await motionList
+                            .Include(m => m.Employee)
+                            .Include(m => m.Supervisor)
+                            .ToListAsync();
+            
+            return motionsList;
         }
 
        

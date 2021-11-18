@@ -14,5 +14,6 @@ namespace LeaveMotionsManagmentApp.Interfaces
         Task DeleteMotion(int? id);
         Task AcceptMotion(int id);
         Task DenyMotion(int id);
+        Task<List<Motion>> FilterMotions(FilterQuery query);
     }
 }
