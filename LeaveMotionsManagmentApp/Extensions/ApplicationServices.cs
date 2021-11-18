@@ -12,11 +12,15 @@ namespace LeaveMotionsManagmentApp.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration Configuration)
         {
+            services.AddHttpContextAccessor();
+
             services.AddDbContext<ApplicationDbContext>(options =>
              options.UseSqlServer(
                  Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IMotionRepository, MotionRepository>();
+
+           
 
             return services;
         }

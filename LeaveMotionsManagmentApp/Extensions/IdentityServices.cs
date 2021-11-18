@@ -1,5 +1,5 @@
 ﻿using LeaveMotionsManagmentApp.Data;
-using LeaveMotionsManagmentApp.Entities;
+using LeaveMotionsManagmentApp.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

@@ -4,14 +4,16 @@ using LeaveMotionsManagmentApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LeaveMotionsManagmentApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211118124433_InitialMigration")]
+    partial class InitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,38 +84,6 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "59373f6c-f198-46dd-972c-cf813bf05424",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "88c9b4fe-1413-4131-bc69-d2d4239251f9",
-                            Email = "user@email.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "USER@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFfXwdR5Qu/k6vGRx9AlYAtP1aKlUM0oMdqr1k3eiv10DfW8iju0HH2M2dL73se+Qg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "7479774d-3283-48ad-9a0a-8437b391698b",
-                            TwoFactorEnabled = false,
-                            UserName = "user@email.com"
-                        },
-                        new
-                        {
-                            Id = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "85837ebb-3603-4e6b-bca9-97a77f82be3a",
-                            Email = "supervisor@email.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "SUPERVISOR@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHY+n2N0GHHxtevW3/C6RxU/l0+q/nARkBa/ZhMau0Q/ZxaQFB8uYP8SbgoinyrkIw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3a30367d-57cd-4d6e-9cc5-7fdb234f0298",
-                            TwoFactorEnabled = false,
-                            UserName = "supervisor@email.com"
-                        });
                 });
 
             modelBuilder.Entity("LeaveMotionsManagmentApp.Models.Motion", b =>
@@ -184,22 +154,6 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
-                            ConcurrencyStamp = "59373f6c-f198-46dd-972c-cf813bf05424",
-                            Name = "Employee",
-                            NormalizedName = "EMPLOYEE"
-                        },
-                        new
-                        {
-                            Id = "ce929b1c-01df-4073-a711-c501b68b96f4",
-                            ConcurrencyStamp = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
-                            Name = "Supervisor",
-                            NormalizedName = "SUPERVISOR"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -287,18 +241,6 @@ namespace LeaveMotionsManagmentApp.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "59373f6c-f198-46dd-972c-cf813bf05424",
-                            RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
-                        },
-                        new
-                        {
-                            UserId = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
-                            RoleId = "ce929b1c-01df-4073-a711-c501b68b96f4"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>

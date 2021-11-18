@@ -1,5 +1,5 @@
 ﻿using LeaveMotionsManagmentApp.Data;
-using LeaveMotionsManagmentApp.Entities;
+using LeaveMotionsManagmentApp.Models;
 using LeaveMotionsManagmentApp.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;

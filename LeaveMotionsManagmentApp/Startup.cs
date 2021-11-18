@@ -1,5 +1,5 @@
 using LeaveMotionsManagmentApp.Data;
-using LeaveMotionsManagmentApp.Entities;
+using LeaveMotionsManagmentApp.Models;
 using LeaveMotionsManagmentApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,13 +29,14 @@ namespace LeaveMotionsManagmentApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpContextAccessor();
+           
             services.AddApplicationServices(Configuration);
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddIdentityServices(Configuration);
             services.AddControllersWithViews();
+            services.AddCoreAdmin();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +46,7 @@ namespace LeaveMotionsManagmentApp
             {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
+
             }
             else
             {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveMotionsManagmentApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211117172911_MotionsEntity")]
-    partial class MotionsEntity
+    [Migration("20211118130322_SupervisorSeeder")]
+    partial class SupervisorSeeder
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace LeaveMotionsManagmentApp.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("LeaveMotionsManagmentApp.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("LeaveMotionsManagmentApp.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -84,9 +84,41 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "59373f6c-f198-46dd-972c-cf813bf05424",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "88c9b4fe-1413-4131-bc69-d2d4239251f9",
+                            Email = "user@email.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "USER@EMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFfXwdR5Qu/k6vGRx9AlYAtP1aKlUM0oMdqr1k3eiv10DfW8iju0HH2M2dL73se+Qg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7479774d-3283-48ad-9a0a-8437b391698b",
+                            TwoFactorEnabled = false,
+                            UserName = "user@email.com"
+                        },
+                        new
+                        {
+                            Id = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "85837ebb-3603-4e6b-bca9-97a77f82be3a",
+                            Email = "supervisor@email.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "SUPERVISOR@EMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHY+n2N0GHHxtevW3/C6RxU/l0+q/nARkBa/ZhMau0Q/ZxaQFB8uYP8SbgoinyrkIw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "3a30367d-57cd-4d6e-9cc5-7fdb234f0298",
+                            TwoFactorEnabled = false,
+                            UserName = "supervisor@email.com"
+                        });
                 });
 
-            modelBuilder.Entity("LeaveMotionsManagmentApp.Entities.Motion", b =>
+            modelBuilder.Entity("LeaveMotionsManagmentApp.Models.Motion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -154,6 +186,22 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                            ConcurrencyStamp = "59373f6c-f198-46dd-972c-cf813bf05424",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        },
+                        new
+                        {
+                            Id = "ce929b1c-01df-4073-a711-c501b68b96f4",
+                            ConcurrencyStamp = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
+                            Name = "Supervisor",
+                            NormalizedName = "SUPERVISOR"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -241,6 +289,18 @@ namespace LeaveMotionsManagmentApp.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "59373f6c-f198-46dd-972c-cf813bf05424",
+                            RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
+                        },
+                        new
+                        {
+                            UserId = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
+                            RoleId = "ce929b1c-01df-4073-a711-c501b68b96f4"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -264,13 +324,13 @@ namespace LeaveMotionsManagmentApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("LeaveMotionsManagmentApp.Entities.Motion", b =>
+            modelBuilder.Entity("LeaveMotionsManagmentApp.Models.Motion", b =>
                 {
-                    b.HasOne("LeaveMotionsManagmentApp.Entities.ApplicationUser", "Employee")
+                    b.HasOne("LeaveMotionsManagmentApp.Models.ApplicationUser", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId");
 
-                    b.HasOne("LeaveMotionsManagmentApp.Entities.ApplicationUser", "Supervisor")
+                    b.HasOne("LeaveMotionsManagmentApp.Models.ApplicationUser", "Supervisor")
                         .WithMany()
                         .HasForeignKey("SupervisorId");
 
@@ -290,7 +350,7 @@ namespace LeaveMotionsManagmentApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("LeaveMotionsManagmentApp.Entities.ApplicationUser", null)
+                    b.HasOne("LeaveMotionsManagmentApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -299,7 +359,7 @@ namespace LeaveMotionsManagmentApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("LeaveMotionsManagmentApp.Entities.ApplicationUser", null)
+                    b.HasOne("LeaveMotionsManagmentApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -314,7 +374,7 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LeaveMotionsManagmentApp.Entities.ApplicationUser", null)
+                    b.HasOne("LeaveMotionsManagmentApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -323,7 +383,7 @@ namespace LeaveMotionsManagmentApp.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("LeaveMotionsManagmentApp.Entities.ApplicationUser", null)
+                    b.HasOne("LeaveMotionsManagmentApp.Models.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

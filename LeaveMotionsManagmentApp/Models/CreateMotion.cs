@@ -1,4 +1,4 @@
-﻿using LeaveMotionsManagmentApp.Entities;
+﻿using LeaveMotionsManagmentApp.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

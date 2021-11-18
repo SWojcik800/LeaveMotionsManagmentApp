@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LeaveMotionsManagmentApp.Data;
-using LeaveMotionsManagmentApp.Entities;
+using LeaveMotionsManagmentApp.Models;
 using LeaveMotionsManagmentApp.Models;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using LeaveMotionsManagmentApp.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LeaveMotionsManagmentApp.Controllers
 {
@@ -25,6 +26,7 @@ namespace LeaveMotionsManagmentApp.Controllers
             _motionRepository = motionRepository;
         }
 
+        [Authorize(Roles="Employee")]
         // GET: Motions
         public async Task<IActionResult> Index()
         {
