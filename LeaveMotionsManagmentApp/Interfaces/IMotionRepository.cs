@@ -11,5 +11,8 @@ namespace LeaveMotionsManagmentApp.Interfaces
         Task<Motion> CancelMotion(int? id);
         Task<Motion> CreateMotion(CreateMotion model);
         Task UpdateMotion(int id, Motion editedMotion);
+        Task DeleteMotion(int? id);
+        Task AcceptMotion(int id);
+        Task DenyMotion(int id);
     }
 }

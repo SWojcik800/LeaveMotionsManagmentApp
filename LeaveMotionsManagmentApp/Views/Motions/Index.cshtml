@@ -24,12 +24,17 @@
             <th>
                 @Html.DisplayNameFor(model => model.RequestedDueDate)
             </th>
-            
+
             <th>
                 @Html.DisplayNameFor(model => model.MotionState)
             </th>
-          
-         
+            @if (User.IsInRole("Supervisor"))
+            {
+                <th>
+                    Applicant 
+                </th>
+            }
+
             <th>
                 @Html.DisplayNameFor(model => model.Supervisor.UserName)
             </th>
@@ -54,13 +59,34 @@
             <td>
                 @Html.DisplayFor(modelItem => item.MotionState)
             </td>
+
+            @if (User.IsInRole("Supervisor"))
+            {
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.UserName)
+            
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supervisor.UserName)
+
+        </td>
+            }
             <td>
-                @Html.DisplayFor(modelItem => item.Supervisor.UserName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Cancel" asp-route-id="@item.Id">Cancel</a>
+                @if (User.IsInRole("Employee"))
+                {
+                    <a asp-action="Cancel" asp-route-id="@item.Id">Cancel</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                }
+                @if (User.IsInRole("Supervisor"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Accept" asp-route-id="@item.Id">Accept</a>
+                    <a asp-action="Deny" asp-route-id="@item.Id">Deny</a>
+                }
+
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+
+
             </td>
         </tr>
 }
