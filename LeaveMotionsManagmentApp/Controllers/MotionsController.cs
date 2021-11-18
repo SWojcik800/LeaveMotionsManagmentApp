@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using LeaveMotionsManagmentApp.Models;
 using LeaveMotionsManagmentApp.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace LeaveMotionsManagmentApp.Controllers
 {
@@ -24,13 +25,31 @@ namespace LeaveMotionsManagmentApp.Controllers
         
         public async Task<IActionResult> Index()
         {
-            return View(await _motionRepository.ListMotions());
+            
+            var motions = await _motionRepository.ListMotions();
+            var model = new ListMotions();
+            model.Motions = motions;
+            model.Query = new FilterQuery() {
+                DisplayResults = 5,
+  
+            };
+
+            return View(model);
         }
 
         // GET: Motions/Query/{name}
         public async Task<IActionResult> Query([FromQuery] FilterQuery query)
         {
-            return View(nameof(Index), await _motionRepository.FilterMotions(query));
+
+            var motions = await _motionRepository.FilterMotions(query);
+            var model = new ListMotions();
+            model.Motions = motions;
+            model.Query = query;
+
+            
+
+
+            return View(nameof(Index), model);
         }
 
         [Authorize(Roles = "Employee, Supervisor")]

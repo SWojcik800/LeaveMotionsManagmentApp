@@ -1,7 +1,13 @@
-﻿@model IEnumerable<LeaveMotionsManagmentApp.Models.Motion>
+﻿@model ListMotions
 
 @{
     ViewData["Title"] = "Index";
+    ViewData["Name"] = Model.Query.Name;
+    ViewData["Send"] = Model.Query.Send != DateTime.MinValue ? Model.Query.Send.ToString("yyyy-MM-dd") : "";
+    ViewData["RequestedStartingDate"] = Model.Query.Send != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : "";
+    ViewData["RequestedDueDate"] = Model.Query.Send != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : "";
+    ViewData["DisplayResults"] = Model.Query.DisplayResults;
+
 }
 
 <h1>Motions</h1>
@@ -9,7 +15,7 @@
 <form asp-controller="Motions" asp-action="Query" method="get">
     <p>
         
-        <input type="text" name="name" placeholder="Name of the motion/user" />
+        <input type="text" name="name" placeholder="Name of the motion/user" value="@ViewData["Name"]" />
        &nbsp;
      
         <select name="state">
@@ -25,25 +31,25 @@
         <div class="form-group">
             <label>Send</label>
             <br />
-            <input type="date" data-date-format="DD MMMM YYYY" name="Send" value="" />
+            <input type="date" data-date-format="DD MMMM YYYY" name="Send"  />
             <br />
-
+          
             <label>Requested Starting</label>
             <br />
 
-            <input type="date" data-date-format="DD MMMM YYYY" name="requestedStartingDate" value="" />
+            <input type="date" data-date-format="DD MMMM YYYY" name="requestedStartingDate"  />
             <br />
             <label>Requested Due</label>
             <br />
 
-            <input type="date" data-date-format="DD MMMM YYYY" name="requestedDueDate" value="" />
+            <input type="date" data-date-format="DD MMMM YYYY" name="requestedDueDate"  />
             <br />
             <label>Display</label>
             <br />
-            <input type="number" name="displayResults" value="5" />
+            <input type="number" name="displayResults" value="@ViewData["DisplayResults"]" />
         </div>
         
-        <input class="btn btn-primary mt-2" type="submit" value="Search" />
+        <input class="btn btn-primary mt-2" type="submit" value="Filter" />
     </p>
 </form>
 <br />
@@ -58,20 +64,20 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Send)
+                Send
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RequestedStartingDate)
+                Requested Starting Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RequestedDueDate)
+                Requested Due Date
             </th>
 
             <th>
-                @Html.DisplayNameFor(model => model.MotionState)
+                Motion State
             </th>
             @if (User.IsInRole("Supervisor"))
             {
@@ -81,13 +87,13 @@
             }
 
             <th>
-                @Html.DisplayNameFor(model => model.Supervisor.UserName)
+                Supervisor
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Motions) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -124,7 +130,7 @@
             }
             @if (User.IsInRole("Supervisor"))
             {
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger ">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mt-2">Delete</a>
                 <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success mt-2">Accept</a>
                 <a asp-action="Deny" asp-route-id="@item.Id" class="btn btn-warning mt-2">Deny</a>
             }
