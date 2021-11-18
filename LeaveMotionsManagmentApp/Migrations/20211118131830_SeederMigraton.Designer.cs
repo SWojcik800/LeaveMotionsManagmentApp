@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveMotionsManagmentApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211118130322_SupervisorSeeder")]
-    partial class SupervisorSeeder
+    [Migration("20211118131830_SeederMigraton")]
+    partial class SeederMigraton
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,14 +90,14 @@ namespace LeaveMotionsManagmentApp.Migrations
                         {
                             Id = "59373f6c-f198-46dd-972c-cf813bf05424",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "88c9b4fe-1413-4131-bc69-d2d4239251f9",
+                            ConcurrencyStamp = "2e04ad77-4884-4506-a675-6dd92b94c636",
                             Email = "user@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "USER@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFfXwdR5Qu/k6vGRx9AlYAtP1aKlUM0oMdqr1k3eiv10DfW8iju0HH2M2dL73se+Qg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEABnv/abUFqhIdWgLLpq5Yew6RKy3iI+Gm62CPSCq1wmYyqXhTPiAAcdXSb3d3JoKg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7479774d-3283-48ad-9a0a-8437b391698b",
+                            SecurityStamp = "0eea492c-d38b-48a3-a17b-7b953a9f1c60",
                             TwoFactorEnabled = false,
                             UserName = "user@email.com"
                         },
@@ -105,14 +105,14 @@ namespace LeaveMotionsManagmentApp.Migrations
                         {
                             Id = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85837ebb-3603-4e6b-bca9-97a77f82be3a",
+                            ConcurrencyStamp = "5b118dfc-a22b-4586-83df-9921b096afd3",
                             Email = "supervisor@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SUPERVISOR@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHY+n2N0GHHxtevW3/C6RxU/l0+q/nARkBa/ZhMau0Q/ZxaQFB8uYP8SbgoinyrkIw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO0lFS4WRfugqvhZNFJChUGn28veWXUQgjmzLovJKqGPb+Ox9ovkbIN0vO+wEtdpRw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3a30367d-57cd-4d6e-9cc5-7fdb234f0298",
+                            SecurityStamp = "2c3d30bc-2628-4596-bac6-941c469e3f04",
                             TwoFactorEnabled = false,
                             UserName = "supervisor@email.com"
                         });

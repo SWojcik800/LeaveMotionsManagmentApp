@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveMotionsManagmentApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211118125015_Seeder")]
-    partial class Seeder
+    [Migration("20211118132416_SeederRefactor")]
+    partial class SeederRefactor
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,18 +88,33 @@ namespace LeaveMotionsManagmentApp.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
+                            Id = "59373f6c-f198-46dd-972c-cf813bf05424",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "79774c29-d38a-402f-9fbb-178d5941ec0a",
+                            ConcurrencyStamp = "f4ea0c2b-5ed7-425d-851f-bcfd938092b6",
                             Email = "user@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "USER@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDgZxSRV1/QBVqj4qYkVkKcAjunMTQtJetLe1KPjUbdo6YpgnS8N/0K5fVwFfDNqcw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAV5VrEFa9kUVRJRBkTJBZMduigaGIv1elujPkaF5kbXPigqSgvHrmpEuI5LdP/LSw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f99f28c6-e651-488b-8c40-4552d7c53faa",
+                            SecurityStamp = "af4a23a8-8f08-4be3-aeb2-32acb2879341",
                             TwoFactorEnabled = false,
                             UserName = "user@email.com"
+                        },
+                        new
+                        {
+                            Id = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b15de357-e5c2-4b0f-b281-74b4ada44020",
+                            Email = "supervisor@email.com",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedUserName = "SUPERVISOR@EMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIaG3iDMHUbcDJrsmIIVDfkiZ7Qu0tNikY72Eh0KP3BIUJGvS7zfUSkAm0GPEo+thw==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "1e0a3725-6724-483a-90fb-56f7c40b9bb0",
+                            TwoFactorEnabled = false,
+                            UserName = "supervisor@email.com"
                         });
                 });
 
@@ -176,9 +191,16 @@ namespace LeaveMotionsManagmentApp.Migrations
                         new
                         {
                             Id = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
-                            ConcurrencyStamp = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                            ConcurrencyStamp = "59373f6c-f198-46dd-972c-cf813bf05424",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
+                        },
+                        new
+                        {
+                            Id = "ce929b1c-01df-4073-a711-c501b68b96f4",
+                            ConcurrencyStamp = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
+                            Name = "Supervisor",
+                            NormalizedName = "SUPERVISOR"
                         });
                 });
 
@@ -271,8 +293,13 @@ namespace LeaveMotionsManagmentApp.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
+                            UserId = "59373f6c-f198-46dd-972c-cf813bf05424",
                             RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
+                        },
+                        new
+                        {
+                            UserId = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
+                            RoleId = "ce929b1c-01df-4073-a711-c501b68b96f4"
                         });
                 });
 

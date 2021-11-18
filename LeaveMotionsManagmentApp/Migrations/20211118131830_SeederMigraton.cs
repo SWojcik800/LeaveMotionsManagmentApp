@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LeaveMotionsManagmentApp.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class SeederMigraton : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -184,6 +184,34 @@ namespace LeaveMotionsManagmentApp.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "341743f0-asd2–42de-afbf-59kmkkmk72cf6", "59373f6c-f198-46dd-972c-cf813bf05424", "Employee", "EMPLOYEE" },
+                    { "ce929b1c-01df-4073-a711-c501b68b96f4", "8b1280d2-20e6-4464-8a6c-46ae41930e9b", "Supervisor", "SUPERVISOR" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "59373f6c-f198-46dd-972c-cf813bf05424", 0, "2e04ad77-4884-4506-a675-6dd92b94c636", "user@email.com", true, false, null, null, "USER@EMAIL.COM", "AQAAAAEAACcQAAAAEABnv/abUFqhIdWgLLpq5Yew6RKy3iI+Gm62CPSCq1wmYyqXhTPiAAcdXSb3d3JoKg==", null, false, "0eea492c-d38b-48a3-a17b-7b953a9f1c60", false, "user@email.com" },
+                    { "8b1280d2-20e6-4464-8a6c-46ae41930e9b", 0, "5b118dfc-a22b-4586-83df-9921b096afd3", "supervisor@email.com", true, false, null, null, "SUPERVISOR@EMAIL.COM", "AQAAAAEAACcQAAAAEO0lFS4WRfugqvhZNFJChUGn28veWXUQgjmzLovJKqGPb+Ox9ovkbIN0vO+wEtdpRw==", null, false, "2c3d30bc-2628-4596-bac6-941c469e3f04", false, "supervisor@email.com" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "341743f0-asd2–42de-afbf-59kmkkmk72cf6", "59373f6c-f198-46dd-972c-cf813bf05424" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "ce929b1c-01df-4073-a711-c501b68b96f4", "8b1280d2-20e6-4464-8a6c-46ae41930e9b" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
