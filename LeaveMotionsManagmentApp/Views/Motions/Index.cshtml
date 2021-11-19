@@ -10,15 +10,18 @@
     ViewData["DisplayResults"] = Model.Query.DisplayResults;
 
     var parameters = new Dictionary<string, string?>
-    {
+                {
 
                 { "Name", Model.Query.Name is null ? " " : Model.Query.Name.ToString() },
                 { "DisplayResults", Model.Query.DisplayResults.ToString() },
                 { "Page", Model.Query.Page.ToString() },
-                { "PageCount", Model.Query.PageCount.ToString() }
-    }; ;
+                { "PageCount", Model.Query.PageCount.ToString() },
+                {"RequestedStartingDate",  Model.Query.RequestedStartingDate != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : null},
+                {"RequestedDueDate",  Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : null }
+               };
+    }; 
 
-}
+
 
 
 <h1>Motions</h1>
@@ -48,12 +51,12 @@
             <label>Requested Starting</label>
             <br />
 
-            <input type="date" data-date-format="DD MMMM YYYY" name="requestedStartingDate" />
+            <input type="date" data-date-format="DD MMMM YYYY" name="requestedStartingDate" value="@ViewData["RequestedStartingDate"]"  />
             <br />
             <label>Requested Due</label>
             <br />
 
-            <input type="date" data-date-format="DD MMMM YYYY" name="requestedDueDate" />
+            <input type="date" data-date-format="DD MMMM YYYY"  name="requestedDueDate" value="@ViewData["RequestedDueDate"]" />
             <br />
             <label>Display</label>
             <br />
