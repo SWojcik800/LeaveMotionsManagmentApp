@@ -4,9 +4,9 @@
 
     ViewData["Title"] = "Index";
     ViewData["Name"] = Model.Query.Name;
-    ViewData["Send"] = Model.Query.Send != DateTime.MinValue ? Model.Query.Send.ToString("yyyy-MM-dd") : "";
-    ViewData["RequestedStartingDate"] = Model.Query.Send != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : "";
-    ViewData["RequestedDueDate"] = Model.Query.Send != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : "";
+    ViewData["Send"] = Model.Query.Send != DateTime.MinValue ? "" : Model.Query.Send.ToString("yyyy-MM-dd");
+    ViewData["RequestedStartingDate"] = Model.Query.RequestedStartingDate != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : "";
+    ViewData["RequestedDueDate"] = Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : "";
     ViewData["DisplayResults"] = Model.Query.DisplayResults;
 
     var parameters = new Dictionary<string, string?>
@@ -15,7 +15,7 @@
                 { "Name", Model.Query.Name is null ? " " : Model.Query.Name.ToString() },
                 { "DisplayResults", Model.Query.DisplayResults.ToString() },
                 { "Page", Model.Query.Page.ToString() },
-                { "PageCount", Model.Query.PageCount.ToString() },
+                { "PageCount", Model.Query.PageCount.ToString() }
     }; ;
 
 }
@@ -42,7 +42,7 @@
         <div class="form-group">
             <label>Send</label>
             <br />
-            <input type="date" data-date-format="DD MMMM YYYY" name="Send" />
+            <input type="date" data-date-format="DD MMMM YYYY" value="" name="Send" />
             <br />
 
             <label>Requested Starting</label>

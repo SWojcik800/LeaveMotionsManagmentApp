@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LeaveMotionsManagmentApp.Migrations
 {
-    public partial class SeederMigraton : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -158,8 +158,8 @@ namespace LeaveMotionsManagmentApp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     Send = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RequestedStartingDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RequestedDueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -199,8 +199,8 @@ namespace LeaveMotionsManagmentApp.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "59373f6c-f198-46dd-972c-cf813bf05424", 0, "2e04ad77-4884-4506-a675-6dd92b94c636", "user@email.com", true, false, null, null, "USER@EMAIL.COM", "AQAAAAEAACcQAAAAEABnv/abUFqhIdWgLLpq5Yew6RKy3iI+Gm62CPSCq1wmYyqXhTPiAAcdXSb3d3JoKg==", null, false, "0eea492c-d38b-48a3-a17b-7b953a9f1c60", false, "user@email.com" },
-                    { "8b1280d2-20e6-4464-8a6c-46ae41930e9b", 0, "5b118dfc-a22b-4586-83df-9921b096afd3", "supervisor@email.com", true, false, null, null, "SUPERVISOR@EMAIL.COM", "AQAAAAEAACcQAAAAEO0lFS4WRfugqvhZNFJChUGn28veWXUQgjmzLovJKqGPb+Ox9ovkbIN0vO+wEtdpRw==", null, false, "2c3d30bc-2628-4596-bac6-941c469e3f04", false, "supervisor@email.com" }
+                    { "59373f6c-f198-46dd-972c-cf813bf05424", 0, "cd5f4da1-a9ed-45b8-a017-90cf8d5dca9d", "user@email.com", true, false, null, null, "USER@EMAIL.COM", "AQAAAAEAACcQAAAAEN2T4tCZErgaGEYHSC+NRhA6VRfVtOzFSRXzPBuyqXiMZK1EbKoh+tpbrYqQYGk9/Q==", null, false, "4f5f12a6-5aff-43e3-8d75-f68143641641", false, "user@email.com" },
+                    { "8b1280d2-20e6-4464-8a6c-46ae41930e9b", 0, "ca79b9ca-a3af-4845-b7cb-6a6ce9c2332f", "supervisor@email.com", true, false, null, null, "SUPERVISOR@EMAIL.COM", "AQAAAAEAACcQAAAAEMYTSPtNi5Pe1F7HRR7XUNZawbLmfXkvC4UkZwHucKa5/MsvEuIKnfSbTV7lJssrKw==", null, false, "c765a730-b6a7-42ff-a09d-31ba086ac5bb", false, "supervisor@email.com" }
                 });
 
             migrationBuilder.InsertData(

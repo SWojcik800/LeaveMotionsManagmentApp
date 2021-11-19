@@ -36,6 +36,8 @@ namespace LeaveMotionsManagmentApp.Repositories
         }
         public async Task<List<Motion>> FilterMotions(FilterQuery? query)
         {
+            
+
             var motionList = _filterQueryBuilder.buildQuery(getBaseQuery(), query);
 
 
@@ -52,8 +54,8 @@ namespace LeaveMotionsManagmentApp.Repositories
         public async Task<Motion> GetMotion(int? id)
         {
             var motion = await getBaseQuery()
-                .Include(m => m.Employee)
                 .Include(m => m.Supervisor)
+                .Include(m => m.Employee)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             return motion;
@@ -121,6 +123,8 @@ namespace LeaveMotionsManagmentApp.Repositories
             {
                 motion.MotionState = MotionState.Accepted;
                 motion.ExaminationDate = DateTime.Now;
+                motion.SupervisorId = GetCurrentUserId();
+                
                 _context.Update(motion);
                 await _context.SaveChangesAsync();
             }
@@ -134,6 +138,7 @@ namespace LeaveMotionsManagmentApp.Repositories
 
                 motion.MotionState = MotionState.Denied;
                 motion.ExaminationDate = DateTime.Now;
+                motion.SupervisorId = GetCurrentUserId();
                 _context.Update(motion);
                 await _context.SaveChangesAsync();
             }

@@ -88,14 +88,14 @@ namespace LeaveMotionsManagmentApp.Migrations
                         {
                             Id = "59373f6c-f198-46dd-972c-cf813bf05424",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4ea0c2b-5ed7-425d-851f-bcfd938092b6",
+                            ConcurrencyStamp = "cd5f4da1-a9ed-45b8-a017-90cf8d5dca9d",
                             Email = "user@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "USER@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAV5VrEFa9kUVRJRBkTJBZMduigaGIv1elujPkaF5kbXPigqSgvHrmpEuI5LdP/LSw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN2T4tCZErgaGEYHSC+NRhA6VRfVtOzFSRXzPBuyqXiMZK1EbKoh+tpbrYqQYGk9/Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "af4a23a8-8f08-4be3-aeb2-32acb2879341",
+                            SecurityStamp = "4f5f12a6-5aff-43e3-8d75-f68143641641",
                             TwoFactorEnabled = false,
                             UserName = "user@email.com"
                         },
@@ -103,14 +103,14 @@ namespace LeaveMotionsManagmentApp.Migrations
                         {
                             Id = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b15de357-e5c2-4b0f-b281-74b4ada44020",
+                            ConcurrencyStamp = "ca79b9ca-a3af-4845-b7cb-6a6ce9c2332f",
                             Email = "supervisor@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SUPERVISOR@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIaG3iDMHUbcDJrsmIIVDfkiZ7Qu0tNikY72Eh0KP3BIUJGvS7zfUSkAm0GPEo+thw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMYTSPtNi5Pe1F7HRR7XUNZawbLmfXkvC4UkZwHucKa5/MsvEuIKnfSbTV7lJssrKw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1e0a3725-6724-483a-90fb-56f7c40b9bb0",
+                            SecurityStamp = "c765a730-b6a7-42ff-a09d-31ba086ac5bb",
                             TwoFactorEnabled = false,
                             UserName = "supervisor@email.com"
                         });
@@ -124,7 +124,9 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
@@ -136,7 +138,9 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("RequestedDueDate")
                         .HasColumnType("datetime2");

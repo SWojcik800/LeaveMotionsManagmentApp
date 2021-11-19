@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LeaveMotionsManagmentApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211118131830_SeederMigraton")]
-    partial class SeederMigraton
+    [Migration("20211119134119_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -90,14 +90,14 @@ namespace LeaveMotionsManagmentApp.Migrations
                         {
                             Id = "59373f6c-f198-46dd-972c-cf813bf05424",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e04ad77-4884-4506-a675-6dd92b94c636",
+                            ConcurrencyStamp = "cd5f4da1-a9ed-45b8-a017-90cf8d5dca9d",
                             Email = "user@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "USER@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEABnv/abUFqhIdWgLLpq5Yew6RKy3iI+Gm62CPSCq1wmYyqXhTPiAAcdXSb3d3JoKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN2T4tCZErgaGEYHSC+NRhA6VRfVtOzFSRXzPBuyqXiMZK1EbKoh+tpbrYqQYGk9/Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0eea492c-d38b-48a3-a17b-7b953a9f1c60",
+                            SecurityStamp = "4f5f12a6-5aff-43e3-8d75-f68143641641",
                             TwoFactorEnabled = false,
                             UserName = "user@email.com"
                         },
@@ -105,14 +105,14 @@ namespace LeaveMotionsManagmentApp.Migrations
                         {
                             Id = "8b1280d2-20e6-4464-8a6c-46ae41930e9b",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5b118dfc-a22b-4586-83df-9921b096afd3",
+                            ConcurrencyStamp = "ca79b9ca-a3af-4845-b7cb-6a6ce9c2332f",
                             Email = "supervisor@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedUserName = "SUPERVISOR@EMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO0lFS4WRfugqvhZNFJChUGn28veWXUQgjmzLovJKqGPb+Ox9ovkbIN0vO+wEtdpRw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMYTSPtNi5Pe1F7HRR7XUNZawbLmfXkvC4UkZwHucKa5/MsvEuIKnfSbTV7lJssrKw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2c3d30bc-2628-4596-bac6-941c469e3f04",
+                            SecurityStamp = "c765a730-b6a7-42ff-a09d-31ba086ac5bb",
                             TwoFactorEnabled = false,
                             UserName = "supervisor@email.com"
                         });
@@ -126,7 +126,9 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(450)");
@@ -138,7 +140,9 @@ namespace LeaveMotionsManagmentApp.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("RequestedDueDate")
                         .HasColumnType("datetime2");

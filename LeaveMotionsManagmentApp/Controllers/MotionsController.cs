@@ -30,6 +30,8 @@ namespace LeaveMotionsManagmentApp.Controllers
             var motions = await _motionRepository.ListMotions();
             var model = new ListMotions();
             model.Motions = motions;
+
+            //Initial values for inputs
             model.Query = new FilterQuery() {
                 DisplayResults = 5,
                 Page = 1,
@@ -48,7 +50,10 @@ namespace LeaveMotionsManagmentApp.Controllers
         {
 
             var motions = await _motionRepository.FilterMotions(query);
-            
+
+            if (query.DisplayResults <= 0)
+                query.DisplayResults = 5;
+
             var model = new ListMotions();
             //query.Page = page;
             model.Motions = motions;
@@ -91,12 +96,13 @@ namespace LeaveMotionsManagmentApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Employee")]
-        public async Task<IActionResult> Create([Bind("Name,Description,RequestedStartingDate,RequestedDueDate,MotionState")] CreateMotion model)
+        public async Task<IActionResult> Create([Bind("Name,Description,RequestedStartingDate,RequestedDueDate")] CreateMotion model)
         {
 
             var motion = new Motion();
             if (ModelState.IsValid)
             {
+                motion.MotionState = MotionState.Pending;
                 motion = await _motionRepository.CreateMotion(model);
                 return RedirectToAction(nameof(Index));
             }
