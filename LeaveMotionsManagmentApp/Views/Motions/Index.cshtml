@@ -10,7 +10,7 @@
     ViewData["DisplayResults"] = Model.Query.DisplayResults;
 
     var parameters = new Dictionary<string, string?>
-                {
+{
 
                 { "Name", Model.Query.Name is null ? " " : Model.Query.Name.ToString() },
                 { "DisplayResults", Model.Query.DisplayResults.ToString() },
@@ -19,53 +19,77 @@
                 {"RequestedStartingDate",  Model.Query.RequestedStartingDate != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : null},
                 {"RequestedDueDate",  Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : null }
                };
-    }; 
+}
 
 
 
 
 <h1>Motions</h1>
 <br />
-<form asp-action="Query" method="get">
+<form class="form-horizontal" asp-action="Query" method="get">
     <p>
 
-        <input type="text" name="name" placeholder="Name of the motion/user" value="@ViewData["Name"]" />
-        &nbsp;
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="search" class="form-control" name="name" placeholder="Name of the motion" value="@ViewData["Name"]" />
 
-        <select name="state">
-            <option value="">All</option>
-            <option value="Accepted">Accepted</option>
-            <option value="Denied">Denied</option>
-            <option value="Pending">Pending</option>
-            @if (User.IsInRole("Supervisor"))
-            {
-                <option value="Cancelled">Cancelled</option>
-            }
-        </select>
-        <div class="form-group">
-            <label>Send</label>
-            <br />
-            <input type="date" data-date-format="DD MMMM YYYY" value="" name="Send" />
-            <br />
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <select class="form-control" name="state">
+                        <option value="">All</option>
+                        <option value="Accepted">Accepted</option>
+                        <option value="Denied">Denied</option>
+                        <option value="Pending">Pending</option>
+                        @if (User.IsInRole("Supervisor"))
+                        {
+                            <option value="Cancelled">Cancelled</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Display</label>
 
-            <label>Requested Starting</label>
-            <br />
+                    <input class="form-control" type="number" name="displayResults" value="@ViewData["DisplayResults"]" />
+                </div>
 
-            <input type="date" data-date-format="DD MMMM YYYY" name="requestedStartingDate" value="@ViewData["RequestedStartingDate"]"  />
-            <br />
-            <label>Requested Due</label>
-            <br />
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
 
-            <input type="date" data-date-format="DD MMMM YYYY"  name="requestedDueDate" value="@ViewData["RequestedDueDate"]" />
-            <br />
-            <label>Display</label>
-            <br />
-            <input type="number" name="displayResults" value="@ViewData["DisplayResults"]" />
+                    <label>Requested Starting</label>
+
+                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" name="requestedStartingDate" value="@ViewData["RequestedStartingDate"]" />
+                </div>
+                <div class="form-group">
+                    <label>Requested Due</label>
+
+
+                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" name="requestedDueDate" value="@ViewData["RequestedDueDate"]" />
+                </div>
+                <div class="form-group">
+                    <label>Send</label>
+                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" value="" name="Send" />
+
+                </div>
+            </div>
+
 
         </div>
 
-        <input class="btn btn-primary mt-2" type="submit" value="Filter" />
-    
+
+
+        <div class="btn-group">
+            <input class="btn btn-primary mt-2" type="submit" value="Filter" /> &nbsp;
+            <a asp-action="Index" class="btn btn-warning mt-2">Reset</a>
+        </div>
+        
+
+
+
+
     </p>
 </form>
 <br />
@@ -139,27 +163,38 @@
 
                     </td>
                 }
+                else
+                {
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Supervisor.UserName)
+
+                    </td>
+                }
+
                 <td>
                     @if (User.IsInRole("Employee"))
                     {
-                        <a asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-danger">Cancel</a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
+                        <div class="btn-group">
+                            <a asp-action="Cancel" asp-route-id="@item.Id" class="btn btn-danger">Cancel</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-info">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+                        </div>
                     }
                     @if (User.IsInRole("Supervisor"))
                     {
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mt-2">Delete</a>
-                        <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success mt-2">Accept</a>
-                        <a asp-action="Deny" asp-route-id="@item.Id" class="btn btn-warning mt-2">Deny</a>
+                        <div class="btn-group">
+                            <a asp-action="Accept" asp-route-id="@item.Id" class="btn btn-success">Accept</a>
+                            <a asp-action="Deny" asp-route-id="@item.Id" class="btn btn-warning ">Deny</a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
+
+                        </div>
+
                     }
 
-                    @if (User.IsInRole("Employee"))
-                    {
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary">Details</a>
-                    }
-                    else
-                    {
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-secondary mt-2">Details</a>
-                    }
+
+
 
 
 

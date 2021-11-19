@@ -36,9 +36,6 @@ namespace LeaveMotionsManagmentApp.Controllers
                 DisplayResults = 5,
                 Page = 1,
                 Name = "",
-                Send = DateTime.Now,
-                RequestedStartingDate = DateTime.Now,
-                RequestedDueDate = DateTime.Now,
                 
             };
 
