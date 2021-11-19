@@ -4,6 +4,7 @@ using LeaveMotionsManagmentApp.Models;
 using LeaveMotionsManagmentApp.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Linq;
 
 namespace LeaveMotionsManagmentApp.Controllers
 {
@@ -31,7 +32,12 @@ namespace LeaveMotionsManagmentApp.Controllers
             model.Motions = motions;
             model.Query = new FilterQuery() {
                 DisplayResults = 5,
-  
+                Page = 1,
+                Name = "",
+                Send = DateTime.Now,
+                RequestedStartingDate = DateTime.Now,
+                RequestedDueDate = DateTime.Now,
+                
             };
 
             return View(model);
@@ -42,7 +48,9 @@ namespace LeaveMotionsManagmentApp.Controllers
         {
 
             var motions = await _motionRepository.FilterMotions(query);
+            
             var model = new ListMotions();
+            //query.Page = page;
             model.Motions = motions;
             model.Query = query;
 

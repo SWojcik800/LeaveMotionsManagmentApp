@@ -21,5 +21,8 @@ namespace LeaveMotionsManagmentApp.Models
 
         public int? DisplayResults { get; set; }
 
+        public int? Page { get; set; }
+        public int? PageCount { get; set; }
+
     }
 }

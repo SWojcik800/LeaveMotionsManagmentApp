@@ -36,8 +36,25 @@ namespace LeaveMotionsManagmentApp.Services
                 baseQuery = baseQuery
                     .Where(m => m.RequestedDueDate.Date <= query.RequestedDueDate);
 
+            //Basic pagination
             if (query.DisplayResults != null)
+            {
+                if (query.Page == null)
+                    query.Page = 1;
+
+                    query.PageCount = baseQuery.Count() % query.DisplayResults == 0 ?
+                        baseQuery.Count() / query.DisplayResults
+                        :
+                        baseQuery.Count() / query.DisplayResults + 1;
+                baseQuery = baseQuery.Skip((int)((query.Page - 1) * query.DisplayResults));
+
                 baseQuery = baseQuery.Take((int)query.DisplayResults);
+            }
+                
+                
+
+                    
+                
 
             return baseQuery;
                 
