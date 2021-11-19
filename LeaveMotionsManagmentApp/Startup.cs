@@ -1,6 +1,8 @@
+using LeaveMotionsManagmentApp.Data;
 using LeaveMotionsManagmentApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,6 +34,13 @@ namespace LeaveMotionsManagmentApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //Auto migration
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

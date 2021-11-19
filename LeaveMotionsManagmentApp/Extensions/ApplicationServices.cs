@@ -19,7 +19,7 @@ namespace LeaveMotionsManagmentApp.Extensions
 
             services.AddDbContext<ApplicationDbContext>(options =>
              options.UseSqlServer(
-                 Configuration.GetConnectionString("DefaultConnection")));
+                 Configuration.GetConnectionString("DockerDbConnection")));
 
             services.AddScoped<IFilterQueryBuilder, FilterQueryBuilder>();
             services.AddScoped<IMotionRepository, MotionRepository>();

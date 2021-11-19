@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  leavemotionsmanagmentapp:
+    image: ${DOCKER_REGISTRY-}leavemotionsmanagmentapp
+    build:
+      context: .
+      dockerfile: Dockerfile
