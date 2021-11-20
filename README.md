@@ -1,8 +1,7 @@
-#LeaveMotionsManagmentApp
-
+# LeaveMotionsManagmentApp
 Simple CRUD written in .NET Core MVC
 
-Running the app:
+1. Running the app:
 To run the app execute command: "docker compose up".
 App URL: https://localhost.
 Default ports are 80, 443.
