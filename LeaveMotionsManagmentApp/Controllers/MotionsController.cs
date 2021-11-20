@@ -263,6 +263,14 @@ namespace LeaveMotionsManagmentApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = "Employee, Supervisor")]
+        public async Task<IActionResult> Stats()
+        {
+            var motions = await _motionRepository.ListMotions();
+            var model = new ShowStats(motions);
+            return View(model);
+        }
+
 
 
     }

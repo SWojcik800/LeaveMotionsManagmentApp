@@ -23,6 +23,18 @@
                 {"Send",  Model.Query.Send != DateTime.MinValue ? Model.Query.Send.ToString("yyyy-MM-dd") : null },
                 {"State", Model.Query.State },
                };
+
+    var selected = new List<string>
+    {
+        "All",
+        "Accepted",
+        "Denied",
+        "Pending"
+
+    };
+
+    if (Model.Query.State == null)
+        Model.Query.State = "";
 }
 
 
@@ -43,13 +55,50 @@
                 <div class="form-group">
                     <label>State</label>
                     <select class="form-control" name="state" value="@ViewData["State"]">
-                        <option value="">All</option>
-                        <option value="Accepted">Accepted</option>
-                        <option value="Denied">Denied</option>
-                        <option value="Pending">Pending</option>
+                        @if (Model.Query.State == "")
+                        {
+                            <option selected value="">All</option>
+                        }
+                        else
+                        {
+                            <option value="">All</option>   
+                        }
+                        @if (Model.Query.State.ToLower() == "accepted")
+                        {
+                            <option selected value="Accepted">Accepted</option>
+                        }
+                        else
+                        {
+                            <option value="Accepted">Accepted</option>
+                        }
+                        @if (Model.Query.State.ToLower() == "denied")
+                        {
+                            <option selected value="Denied">Denied</option>
+                        }
+                        else
+                        {
+                            <option value="Denied">Denied</option>
+                        }
+                        @if (Model.Query.State.ToLower() == "pending")
+                        {
+                            <option selected value="">Pending</option>
+                        }
+                        else
+                        {
+                            <option value="Pending">Pending</option>
+                        }
+
                         @if (User.IsInRole("Supervisor"))
                         {
+                            @if (Model.Query.State.ToLower() == "cancelled")
+                            {
+                                <option selected value="Cancelled">Cancelled</option>
+                            }
+                            else
+                            {
                             <option value="Cancelled">Cancelled</option>
+                            }
+                            
                         }
                     </select>
                 </div>
@@ -89,7 +138,7 @@
             <input class="btn btn-primary mt-2" type="submit" value="Filter" /> &nbsp;
             <a asp-action="Index" class="btn btn-warning mt-2">Reset</a>
         </div>
-        
+
 
 
 
@@ -217,8 +266,15 @@
             {
                 var parametersForPagination = parameters;
                 parametersForPagination["Page"] = i.ToString();
+                @if (i == Model.Query.Page)
+                {
+                    <li class="page-item active"><a class="page-link" asp-all-route-data="parametersForPagination">@i</a></li>
+                }
+                else
+                {
+                    <li class="page-item"><a class="page-link" asp-all-route-data="parametersForPagination">@i</a></li>
+                }
 
-                <li class="page-item"><a class="page-link" asp-all-route-data="parametersForPagination">@i</a></li>
             }
         </ul>
     </nav>

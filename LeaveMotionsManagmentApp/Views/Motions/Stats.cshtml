@@ -1,0 +1,49 @@
+﻿@model ShowStats
+@{
+
+    var accepted = new Dictionary<string, string>() { { "state", "accepted" }, { "displayResults", "5" } };
+    var pending = new Dictionary<string, string>() { { "state", "pending" }, { "displayResults", "5" } };
+    var denied = new Dictionary<string, string>() { { "state", "denied" }, { "displayResults", "5" } };
+    var cancelled = new Dictionary<string, string>() { { "state", "cancelled" }, { "displayResults", "5" } };
+}
+
+
+<div class="row">
+    <div class="col-md-12 bg-primary text-white">
+        <h1 class="text-center mt-2">Motions</h1>
+        <h1 class="text-center">@Model.All</h1>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-md-4 text-white text-center bg-success">
+        <h2 class="mt-2">Accepted</h2>
+        <h2 class="font-weight-bold"> @Model.Accepted</h2>
+        <a asp-action="Query" , asp-all-route-data="@accepted" class="btn btn-primary mb-2">Filter</a>
+
+    </div>
+    <div class="col-md-4 text-white bg-dark text-center">
+        <h2>Pending</h2>
+        <h2 class="font-weight-bold">@Model.Pending</h2>
+        <a asp-action="Query" , asp-all-route-data="@pending" class="btn btn-primary mt-2 mb-2">Filter</a>
+
+    </div>
+    <div class="col-md-4 text-white text-center bg-danger">
+        <h2 class="mt-2">Denied</h2>
+        <h2 class="font-weight-bold">@Model.Denied</h2>
+        <a asp-action="Query" , asp-all-route-data="@denied" class="btn btn-primary mb-2">Filter</a>
+
+    </div>
+</div>
+
+@if (User.IsInRole("Supervisor"))
+{
+    <div class="row">
+        <div class="col-md-12 text-white bg-warning text-center">
+            <h2 class="mt-2">Cancelled</h2>
+            <h2 class="font-weight-bold">@Model.Cancelled</h2>
+            <a asp-action="Query" , asp-all-route-data="@cancelled" class="btn btn-primary mb-2">Filter</a>
+        </div>
+    </div>
+}
