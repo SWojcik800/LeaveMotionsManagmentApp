@@ -1,10 +1,6 @@
-﻿using LeaveMotionsManagmentApp.Models;
-using LeaveMotionsManagmentApp.Validation.Attributes;
+﻿using LeaveMotionsManagmentApp.Validation.Attributes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LeaveMotionsManagmentApp.Models
 {
@@ -30,7 +26,7 @@ namespace LeaveMotionsManagmentApp.Models
         [Required]
         public DateTime RequestedDueDate { get; set; }
 
-        public MotionState MotionState { get; set; }
+        public MotionState MotionState { get; set; } = MotionState.Pending;
 
     }
 }

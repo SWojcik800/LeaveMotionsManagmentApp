@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using LeaveMotionsManagmentApp.Validation.Attributes;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace LeaveMotionsManagmentApp.Models
 {
@@ -19,9 +16,11 @@ namespace LeaveMotionsManagmentApp.Models
         public int Id { get; set; }
         [MaxLength(50)]
         [Required]
+        [MinLength(5)]
         public string Name{ get; set; }
         [MaxLength(150)]
         [Required]
+        [MinLength(5)]
         public string Description { get; set; }
 
         [DataType(DataType.Date)]

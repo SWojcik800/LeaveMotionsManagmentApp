@@ -142,6 +142,7 @@ namespace LeaveMotionsManagmentApp.Controllers
             motion.Description = editedMotion.Description;
             motion.RequestedStartingDate = editedMotion.RequestedStartingDate;
             motion.RequestedDueDate = editedMotion.RequestedDueDate;
+            motion.MotionState = MotionState.Pending;
             
 
             if (ModelState.IsValid)

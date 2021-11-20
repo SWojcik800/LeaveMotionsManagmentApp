@@ -23,9 +23,6 @@ namespace LeaveMotionsManagmentApp.Extensions
 
             services.AddScoped<IFilterQueryBuilder, FilterQueryBuilder>();
             services.AddScoped<IMotionRepository, MotionRepository>();
-            
-
-           
 
             return services;
         }

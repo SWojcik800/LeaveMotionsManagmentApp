@@ -7,7 +7,6 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace LeaveMotionsManagmentApp.Repositories
@@ -70,7 +69,7 @@ namespace LeaveMotionsManagmentApp.Repositories
                 Send = DateTime.Now,
                 RequestedStartingDate = model.RequestedStartingDate,
                 RequestedDueDate = model.RequestedDueDate,
-                MotionState = MotionState.Pending,
+                MotionState = model.MotionState,
                 ExaminationDate = null,
                 EmployeeId = GetCurrentUserId(),
                 SupervisorId = null
