@@ -7,6 +7,7 @@
     ViewData["Send"] = Model.Query.Send != DateTime.MinValue ? "" : Model.Query.Send.ToString("yyyy-MM-dd");
     ViewData["RequestedStartingDate"] = Model.Query.RequestedStartingDate != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : "";
     ViewData["RequestedDueDate"] = Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : "";
+    ViewData["Send"] = Model.Query.Send != DateTime.MinValue ? Model.Query.Send.ToString("yyyy-MM-dd") : "";
     ViewData["DisplayResults"] = Model.Query.DisplayResults;
     ViewData["State"] = Model.Query.State;
 
@@ -19,6 +20,7 @@
                 { "PageCount", Model.Query.PageCount.ToString() },
                 {"RequestedStartingDate",  Model.Query.RequestedStartingDate != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : null},
                 {"RequestedDueDate",  Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : null },
+                {"Send",  Model.Query.Send != DateTime.MinValue ? Model.Query.Send.ToString("yyyy-MM-dd") : null },
                 {"State", Model.Query.State },
                };
 }
@@ -73,7 +75,7 @@
                 </div>
                 <div class="form-group">
                     <label>Send</label>
-                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" value="@ViewData["Send"] name="Send" />
+                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" value="@ViewData["Send"]" name="Send" />
 
                 </div>
             </div>
