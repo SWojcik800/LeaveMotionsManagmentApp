@@ -25,18 +25,22 @@ namespace LeaveMotionsManagmentApp.Models
         public string Description { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Send { get; set; }
 
         [LaterThanTomorrow]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Required]
         public DateTime RequestedStartingDate { get; set; }
 
         [LaterThanTomorrow]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Required]
         public DateTime RequestedDueDate { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime? ExaminationDate { get; set; }
 
         public MotionState MotionState { get; set; }

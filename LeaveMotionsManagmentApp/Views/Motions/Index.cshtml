@@ -8,6 +8,7 @@
     ViewData["RequestedStartingDate"] = Model.Query.RequestedStartingDate != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : "";
     ViewData["RequestedDueDate"] = Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : "";
     ViewData["DisplayResults"] = Model.Query.DisplayResults;
+    ViewData["State"] = Model.Query.State;
 
     var parameters = new Dictionary<string, string?>
 {
@@ -17,7 +18,8 @@
                 { "Page", Model.Query.Page.ToString() },
                 { "PageCount", Model.Query.PageCount.ToString() },
                 {"RequestedStartingDate",  Model.Query.RequestedStartingDate != DateTime.MinValue ? Model.Query.RequestedStartingDate.ToString("yyyy-MM-dd") : null},
-                {"RequestedDueDate",  Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : null }
+                {"RequestedDueDate",  Model.Query.RequestedDueDate != DateTime.MinValue ? Model.Query.RequestedDueDate.ToString("yyyy-MM-dd") : null },
+                {"State", Model.Query.State },
                };
 }
 
@@ -38,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <label>State</label>
-                    <select class="form-control" name="state">
+                    <select class="form-control" name="state" value="@ViewData["State"]">
                         <option value="">All</option>
                         <option value="Accepted">Accepted</option>
                         <option value="Denied">Denied</option>
@@ -71,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label>Send</label>
-                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" value="" name="Send" />
+                    <input class="form-control" type="date" data-date-format="DD MMMM YYYY" value="@ViewData["Send"] name="Send" />
 
                 </div>
             </div>

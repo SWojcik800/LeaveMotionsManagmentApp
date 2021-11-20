@@ -31,6 +31,23 @@ namespace LeaveMotionsManagmentApp.Data.Seeder
                     Password = "Password1!"
 
 
+                },new Seed()
+                {
+                    UserId = "a1bc861a-d308-4b19-a26a-93e96fb1c661",
+                    RoleId = "ce929b1c-01df-4073-a711-c501b68b96f4",
+                    Username = "othersupervisor@email.com",
+                    Password = "Password1!"
+
+
+                },
+                new Seed()
+                {
+                    UserId = "43f52c18-5726-4322-bd28-98ab883330af",
+                    RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6",
+                    Username = "otheruser@email.com",
+                    Password = "Password1!"
+
+
                 }
             };
 
@@ -41,9 +58,11 @@ namespace LeaveMotionsManagmentApp.Data.Seeder
                 SeedUser(builder, userSeed);
             }
 
+            
+
         }
 
-        public void SeedRoles(ModelBuilder builder)
+        private void SeedRoles(ModelBuilder builder)
         {
             builder.Entity<IdentityRole>().HasData(new IdentityRole
             {
@@ -60,9 +79,14 @@ namespace LeaveMotionsManagmentApp.Data.Seeder
                 Id = "ce929b1c-01df-4073-a711-c501b68b96f4",
                 ConcurrencyStamp = "8b1280d2-20e6-4464-8a6c-46ae41930e9b"
             });
+
+            
+            
         }
 
-        public void SeedUser(ModelBuilder builder, Seed user)
+        
+
+        private void SeedUser(ModelBuilder builder, Seed user)
         {
             var appUser = new ApplicationUser
             {

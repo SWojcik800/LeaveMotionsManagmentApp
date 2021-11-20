@@ -1,4 +1,5 @@
 using LeaveMotionsManagmentApp.Data;
+using LeaveMotionsManagmentApp.Data.Seeder;
 using LeaveMotionsManagmentApp.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Linq;
 
 namespace LeaveMotionsManagmentApp
 {
@@ -38,7 +40,15 @@ namespace LeaveMotionsManagmentApp
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                context.Database.Migrate();
+                context.Database.EnsureCreated();
+
+                if (!context.Motions.Any())
+                {
+                    context.Motions.AddRange(MotionSeeder.GetMotions("59373f6c-f198-46dd-972c-cf813bf05424", "8b1280d2-20e6-4464-8a6c-46ae41930e9b"));
+                    context.Motions.AddRange(MotionSeeder.GetMotions("43f52c18-5726-4322-bd28-98ab883330af", "a1bc861a-d308-4b19-a26a-93e96fb1c661"));
+                    context.SaveChanges();
+                }
+
             }
 
             if (env.IsDevelopment())
