@@ -24,12 +24,13 @@
                 {"State", Model.Query.State },
                };
 
-    var selected = new List<string>
+    var state = new Dictionary<string, string>
     {
-        "All",
-        "Accepted",
-        "Denied",
-        "Pending"
+        {"", "" },
+        {"pending", "text-info" },
+        { "accepted", "text-success"},
+        { "denied", "text-danger"},
+        { "cancelled", "text-warning"}
 
     };
 
@@ -203,7 +204,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.RequestedDueDate)
                 </td>
-                <td>
+                <td class="@state[item.MotionState.ToString().ToLower()]">
                     @Html.DisplayFor(modelItem => item.MotionState)
                 </td>
 
