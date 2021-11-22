@@ -22,15 +22,14 @@ namespace LeaveMotionsManagmentApp.Controllers
         }
 
         [Authorize(Roles="Employee, Supervisor")]
-        // GET: Motions
+        // GET: Motions/{name}
         
         public async Task<IActionResult> Index()
         {
             
-            var motions = await _motionRepository.ListMotions();
+            
             var model = new ListMotions();
-            model.Motions = motions;
-
+           
             //Initial values for inputs
             model.Query = new FilterQuery() {
                 DisplayResults = 5,
@@ -38,6 +37,10 @@ namespace LeaveMotionsManagmentApp.Controllers
                 Name = "",
                 
             };
+
+            var motions = await _motionRepository.FilterMotions(model.Query);
+            model.Motions = motions;
+
 
             return View(model);
         }
@@ -52,7 +55,7 @@ namespace LeaveMotionsManagmentApp.Controllers
                 query.DisplayResults = 5;
 
             var model = new ListMotions();
-            //query.Page = page;
+            
             model.Motions = motions;
             model.Query = query;
 
