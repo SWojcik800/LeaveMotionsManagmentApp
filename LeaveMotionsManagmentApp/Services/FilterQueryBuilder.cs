@@ -1,16 +1,27 @@
 ﻿using LeaveMotionsManagmentApp.Interfaces;
 using LeaveMotionsManagmentApp.Models;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace LeaveMotionsManagmentApp.Services
 {
     public class FilterQueryBuilder : IFilterQueryBuilder
     {
+        
         public IQueryable<Motion> buildQuery(IQueryable<Motion> baseQuery, FilterQuery query)
+        {
+            
+            //Name and state filters
+            AddBasicFilters(query, ref baseQuery);
+            //DateTime MinValue is the value of unassigned DateTime
+            AddDateFilters(query, ref baseQuery);
+            //Basic pagination
+            AddPagination(ref query, ref baseQuery);
+            return baseQuery;
+        }
+
+        //Name and State filters
+        private void AddBasicFilters(FilterQuery query, ref IQueryable<Motion> baseQuery)
         {
             if (query.Name != null)
                 baseQuery = baseQuery
@@ -21,8 +32,11 @@ namespace LeaveMotionsManagmentApp.Services
             if (query.State != null)
                 baseQuery = baseQuery
                     .Where(m => m.MotionState == ParseToEnum(query.State));
+        }
 
-            //DateTime MinValue is the value of unassigned DateTime
+        //Send, RequestStartingDate and RequestDueDate filters
+        private void AddDateFilters(FilterQuery query, ref IQueryable<Motion> baseQuery)
+        {
 
             if (query.Send != DateTime.MinValue)
                 baseQuery = baseQuery
@@ -35,8 +49,11 @@ namespace LeaveMotionsManagmentApp.Services
             if (query.RequestedDueDate != DateTime.MinValue)
                 baseQuery = baseQuery
                     .Where(m => m.RequestedDueDate.Date <= query.RequestedDueDate);
+        }
 
-            //Basic pagination
+        //Pagination mechanism
+        private void AddPagination(ref FilterQuery query, ref IQueryable<Motion> baseQuery)
+        {
             if (query.DisplayResults != null)
             {
                 if (query.Page == null)
@@ -50,11 +67,6 @@ namespace LeaveMotionsManagmentApp.Services
 
                 baseQuery = baseQuery.Take((int)query.DisplayResults);
             }
-
-
-            return baseQuery;
-
-
         }
 
         //Parsing to enum to complete LINQ query above
