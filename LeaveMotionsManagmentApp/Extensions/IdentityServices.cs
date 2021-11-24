@@ -14,7 +14,7 @@ namespace LeaveMotionsManagmentApp.Extensions
     {
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration Configuration) 
         {
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                .AddRoles<IdentityRole>()
                .AddEntityFrameworkStores<ApplicationDbContext>();
 

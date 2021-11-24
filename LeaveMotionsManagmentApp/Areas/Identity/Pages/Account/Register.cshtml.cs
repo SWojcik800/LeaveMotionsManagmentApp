@@ -77,6 +77,10 @@ namespace LeaveMotionsManagmentApp.Areas.Identity.Pages.Account
             {
                 var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+
+                //Setting efault user role to Employee
+                await _userManager.AddToRoleAsync(user, "Employee");
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
